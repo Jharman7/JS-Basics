@@ -10,11 +10,11 @@ var outer = function(){
 //Invoke outer saving the return value into another variable called 'inner'.
 
   //Code Here
-
+var inner = outer();
 //Once you do that, invoke inner.
 
   //Code Here
-
+inner();
 
 
 //Next problem
@@ -33,8 +33,8 @@ var callFriend = function(){
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
   //Code Here
-
-
+var callF = callFriend();
+console.log(callF("435-215-9248"));
 
 //Next Problem
 
@@ -43,13 +43,19 @@ var callFriend = function(){
 /*
   Write a function called makeCounter that makes the following code work properly.
 */
-
+function makeCounter() {
+  var i = 0;
+  return function () {
+    i++;
+    return i;
+  };
+}
   //Code Here
   var count = makeCounter();
-  count(); // 1
-  count(); // 2
-  count(); // 3
-  count(); // 4
+    count(); // 1
+    count(); // 2
+    count(); // 3
+    count(); // 4
 
 
 
@@ -62,9 +68,26 @@ var callFriend = function(){
 */
 
   //Code Here
+var codeLove = function () {
+  return 'I love code';
+}
 
+var codeFriend = function (func) {
+  var counter = 0;
+  return function () {
+    if (counter === 0) {
+      counter++
+      return func();
+    }    else {
+      return null;
+    }
 
+  };
+}
 
+var codeEcho = codeFriend(codeLove);
+// console.log(codeEcho());
+// console.log(codeEcho());
 //Next Problem
 
 
@@ -73,14 +96,18 @@ var callFriend = function(){
   Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter will be an anonymous function and the second parameter, 'N', will be a number. Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
 */
 
-
+var fnCounter = function fnCounter(par1, par2) {
+  for (var i=0; i < par2 ; i++) {
+    par1();
+  }
+  return 'STOP';
+}
 
 //Next Problem
 
 
 
-/*
-  var counter = function(){
+/*  var counter = function(){
     for (var i=1; i<=5; i++) {
       setTimeout( function timer(){
           console.log( i );
@@ -104,12 +131,18 @@ var callFriend = function(){
 */
 
     //Code Here
-
-
+var counter = function(){
+    for (var i=1; i<=5; i++) {
+      (setTimeout( function (){
+          console.log( i );
+      }(), i*1000 ));
+    };
+  };
+// counter();
 
 //Next Problem
 
-
+// (function(i){console.log(i)})(7)
 
 /*
   Make the following code work
@@ -123,5 +156,17 @@ var callFriend = function(){
 
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
-
-
+var funMaker = function (num) {
+  var array =[];
+  for (var i = 0; i <= num; i++) {
+    array[i] = function (){return i;}();
+  }
+  return array;
+};
+var funcArray = funMaker(5);
+console.log(funcArray[0]()); //0
+funcArray[1](); //1
+funcArray[2](); //2
+funcArray[3](); //3
+funcArray[4]();//4
+funcArray[5](); //5
