@@ -96,12 +96,20 @@ var codeEcho = codeFriend(codeLove);
   Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter will be an anonymous function and the second parameter, 'N', will be a number. Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
 */
 
-var fnCounter = function fnCounter(par1, par2) {
-  for (var i=0; i < par2 ; i++) {
-    par1();
-  }
-  return 'STOP';
+var fnCounter = function (par1, par2) {
+  var i = par2;
+  return function (){
+    if (i>0) {
+      i--;
+      return par1();
+    } else {
+      return "STOP";
+    }
+  };
 }
+
+// var count2 = makeCounter();
+// fnCounter(count2,10);
 
 //Next Problem
 
@@ -142,7 +150,6 @@ var counter = function(){
 
 //Next Problem
 
-// (function(i){console.log(i)})(7)
 
 /*
   Make the following code work
@@ -155,16 +162,21 @@ var counter = function(){
   funcArray[5]() //5
 
   *Hint: Don't let this fool you. Break down what's really happening here.
-*/
-var funMaker = function (num) {
-  var array =[];
-  for (var i = 0; i <= num; i++) {
-    array[i] = function (){return i;}();
-  }
-  return array;
-};
-var funcArray = funMaker(5);
+
+  // */
+
+var funcArray = [];
+funcArray[0] = function (){return 0};
+funcArray[1] = function (){return 1};
+funcArray[2] = function (){return 2};
+funcArray[3] = function (){return 3};
+funcArray[4] = function (){return 4};
+funcArray[5] = function (){return 5};
+
+
+
 console.log(funcArray[0]()); //0
+funcArray[0]();
 funcArray[1](); //1
 funcArray[2](); //2
 funcArray[3](); //3
